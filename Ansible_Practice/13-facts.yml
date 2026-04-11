@@ -1,0 +1,9 @@
+- name: check the ansible facts
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: install nginx if redhat family
+      ansible.builtin.dnf:
+        name: nginx
+        state: present
+      when: ansible_os_family == "RedHat"

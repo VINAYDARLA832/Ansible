@@ -1,0 +1,13 @@
+- name: install using loop
+  hosts: localhost
+  connection: local
+  become: true
+  tasks:
+    - name: install list of softwares using loop
+      ansible.builtin.package:
+        name: "{{ item.name }}"
+        state: "{{ item.state }}"
+      loop:
+        - { name: nginx, state: absent }
+        - { name: git, state: present }
+        - { name: vim, state: absent }

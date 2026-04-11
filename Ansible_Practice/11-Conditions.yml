@@ -1,0 +1,14 @@
+- name: checking the condition weather number is less than or greater than 10
+  hosts: localhost
+  connection: local
+  vars:
+    number: 15
+  tasks:
+    - name: check the condition
+      ansible.builtin.debug:
+        msg: "number is less than 10"
+      when: number < 10
+    - name: check the condition
+      ansible.builtin.debug:
+        msg: "number is greater than 10"
+      when: number > 10

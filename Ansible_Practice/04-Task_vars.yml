@@ -1,5 +1,5 @@
 - name: Task level variables
-  hosts: Localhost
+  hosts: Local
   connection: local
   vars:
     name_student: "Raja"

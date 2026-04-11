@@ -1,5 +1,5 @@
 - name: variables from prompt
-  hosts: local
+  hosts: localhost
   connection: local
   vars_prompt:
     - name: "name_student"

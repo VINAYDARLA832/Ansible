@@ -15,4 +15,10 @@
         name: "Variables from task level"
       ansible.builtin.debug:
         msg: "Name: {{ name }}"
-       
+
+# 1.First preference is from command line arguments(arguments variables)
+# 2. Second preference is from task level variables(task variables)
+# 3. Third preference is from variable files(external files variables) variables(var files)
+# 4. Fourth preference is from prompt variables(prompt variables)
+# 5. Fifth preference is from play level variables(play variables)
+# 6. Sixth preference is from inventory variables(inventory variables)

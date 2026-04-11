@@ -1,0 +1,16 @@
+- name: datatypes
+  hosts: localhost
+  connection: local
+  vars:
+    Course: "Ansible for Beginners" # String
+    Duration: 4 # Integer
+    Price: 199.99 # Float
+    Is_Enrolled: true # Boolean
+    Topics: # List
+      - Introduction to Ansible
+      - Ansible Installation
+      - Ansible Playbooks
+      - Ansible Roles
+    Course_Details: # Dictionary
+      Instructor: "Vinay kumar"
+      Level: "Advanced"

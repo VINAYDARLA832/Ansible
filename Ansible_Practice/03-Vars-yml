@@ -2,10 +2,10 @@
   hosts: localhost
   connection: local
   vars:
-    name: "Vinay"
+    name_student: "Vinay"
     course: "devops"
     starting_date: "2022-12-01"
   tasks:
     - name: print play level variables
       ansible.builtin.debug:
-        msg: "my name is {{ name }} and i am in {{ course }} class and my starting date is {{ starting_date }}"
+        msg: "my name is {{ name_student }} and i am in {{ course }} class and my starting date is {{ starting_date }}"

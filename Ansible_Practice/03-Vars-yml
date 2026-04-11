@@ -4,8 +4,8 @@
   vars:
     name: "Vinay"
     course: "devops"
-    starting date: "2022-12-01"
+    starting_date: "2022-12-01"
   tasks:
     - name: print play level variables
       ansible.builtin.debug:
-        msg: "my name is {{ name }} and i am in {{ course }} class and my starting date is {{ starting date }}"
+        msg: "my name is {{ name }} and i am in {{ course }} class and my starting date is {{ starting_date }}"

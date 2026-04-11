@@ -1,0 +1,20 @@
+- name : play1
+  host : frontend
+  become : yes
+  tasks: 
+    -name : play1 and task 1
+     ansible.builtin.debug:
+      msg : "play1 and task 1"
+    -name : play1 and task 2
+     ansible.builtin.debug:
+      msg : "play1 and task 2"
+- name : play2
+  host : frontend
+  become : yes
+  tasks: 
+    -name : play2 and task 1
+     ansible.builtin.debug:
+      msg : "play2 and task 1"
+    -name : play2 and task 2
+     ansible.builtin.debug:
+      msg : "play2 and task 2"

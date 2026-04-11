@@ -5,7 +5,7 @@
     - name: "name_student"
       prompt: "Enter your name"
       private: no
-  -tasks:
+  tasks:
     - name: print variables from prompt
       ansible.builtin.debug:
         msg: "my name is {{ name_student }}"

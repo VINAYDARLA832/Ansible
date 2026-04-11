@@ -1,0 +1,9 @@
+- name: varible refering from var files
+  hosts: localhost
+  connection: local
+  vars_files:
+    - Course.yml
+  tasks:
+    - name: print variables from var files
+      ansible.buitin.debug:
+        msg: "my name is {{ employee }} and my role is {{ Role }} and my skills are {{ Skills }} and my experience is {{ Experience }}"

@@ -1,0 +1,15 @@
+- name: Task level variables
+  hosts: LocalHost
+  connection: local
+  vars:
+    name_student: "Raja"
+    course: "DevOps With Awss"
+    starting_date: "2022-10-01"
+  tasks:
+    - name: task level variables
+      vars:
+        name_student: "Vinay"
+        course: "Ansible"
+        starting_date: "2022-12-01"
+      ansible.builtin.debug:
+        msg: "my name is {{ name_student }} and i am in {{ course }} class and my starting date is {{ starting_date }}"

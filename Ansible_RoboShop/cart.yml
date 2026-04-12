@@ -57,7 +57,7 @@
         dest: /etc/systemd/system/cart.service
     
     - name: demaon reload
-      ansible.builtin.systemd.service:
+      ansible.builtin.systemd:
         name: cart
         enabled: yes
         state: restarted

@@ -84,8 +84,8 @@
     #     state: started
     #     enabled: yes
     
-    - name: demaon reload
-      ansible.builtin.systemd.service:
+    - name: daemon reload
+      ansible.builtin.systemd:
         name: catalogue
         enabled: yes
         state: restarted

@@ -30,7 +30,7 @@
         #items2dict filter is used to convert a list of dictionaries back into a single dictionary. In this case, the tags_list variable, which is a list of dictionaries, is converted back into a single dictionary.
         msg: "my tags are {{ tags_list | items2dict }}"
     - name: cread yaml and take into variable
-      ansibile.builtin.set_fact:
+      ansible.builtin.set_fact:
         student_yml: "{{ Lookup('file', 'student.yml') | from_yaml }}"
     - name: convert yaml to json using to_json filter
       ansible.builtin.debug:

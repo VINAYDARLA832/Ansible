@@ -8,7 +8,15 @@
     DomainName: "darlavinaykumar.fun"
     instances:
       - mongodb
+      - catalogue
       - redis
+      - rabbitmq
+      - user
+      - cart
+      - mysql
+      - shipping
+      - payment
+      - frontend
   tasks:
     - name: create ec2 instance
       amazon.aws.ec2_instance:
@@ -40,4 +48,17 @@
         ttl: 1
         value: "{{ item.instances[0].private_ip_address }}"
         overwrite: true
+      loop: "{{ ec2.results }}"
+    
+    # we are creating one record with public ip only for front end component
+    - name: create route53 record
+      amazon.aws.route53:
+        state: present
+        zone: "{{ DomainName }}"
+        record: "{{ DomainName }}"
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].public_ip_address }}"
+        overwrite: true
+        when: item.item == "frontend"
       loop: "{{ ec2.results }}"

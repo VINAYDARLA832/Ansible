@@ -57,7 +57,7 @@
         dest: /etc/systemd/system/user.service
     
     - name: demaon reload
-      ansible.builtin.systemd.service:
+      ansible.builtin.systemd:
         name: user
         enabled: yes
         state: restarted

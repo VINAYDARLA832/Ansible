@@ -79,7 +79,7 @@
         - /app/db/master-data.sql
 
     - name: daemon reload
-      ansible.builtin.systemd.service:
+      ansible.builtin.systemd:
         name: shipping
         enabled: yes
         state: restarted

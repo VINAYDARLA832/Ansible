@@ -23,8 +23,9 @@
         user: roboshop
         password: roboshop123
         permissions:
-          configure: ".*"
-          read: ".*"
-          write: ".*"
+          - vhost: /
+            configure: ".*"
+            read: ".*"
+            write: ".*"
         state: present
       

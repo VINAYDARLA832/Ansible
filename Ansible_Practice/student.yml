@@ -1,0 +1,19 @@
+- students:
+    - name: Vinay Kumar
+      course: DevOps with AWS
+      starting_date: 2022-12-01
+    - name: Ramesh Kumar
+      course: DevOps with Ansible
+      starting_date: 2022-10-01
+    - name: Suresh Kumar
+      course: DevOps with Docker
+      starting_date: 2022-11-01
+    - name: Mahesh Kumar
+      course: DevOps with Kubernetes
+      starting_date: 2022-09-01
+    - name: Rakesh Kumar
+      course: DevOps with Terraform
+      starting_date: 2022-08-01
+    - name: ganesh Kumar
+      course: DevOps with Jenkins
+      starting_date: 2022-07-01

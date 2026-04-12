@@ -1,0 +1,69 @@
+- name: functions or filters in ansible
+  hosts: local
+  connection: local
+  vars:
+    TechStack: Linux, shell scripting, Ansible, Docker, Kubernetes # this is a string variable
+    tags:
+      # Dictonary and map are same thing in ansible
+      Application: payment
+      Environment: production
+    tags_list:
+      - key: Application
+        value: payment
+      - key: Environment
+        value: production
+  tasks:
+    - name: using filters in ansible
+      ansible.builtin.debug:
+        #default filter is used to provide a default value if the variable is not defined or is empty. In this case, if the variable NAME is not defined or is empty, it will return 'Chaitan' as the default value.
+        msg: "my name is {{ NAMES | default('Chaitan') }}"
+    - name: converting strin to list using split filter
+      ansible.builtin.debug:
+        #split filter is used to split a string into a list based on a specified delimiter. In this case, the TechStack variable is split into a list using the comma (,) as the delimiter.
+        msg: "my tech stack is {{ TechStack | split(',') }}"
+    - name: converting dictonary to list using dict2items filter
+      ansible.builtin.debug:
+        #dict2items filter is used to convert a dictionary into a list of dictionaries, where each dictionary represents a key-value pair from the original dictionary. In this case, the tags variable is converted into a list of dictionaries.
+        msg: "my tags are {{ tags | dict2items }}"
+    - name: converting dictonary to list using items2dict filter
+      ansible.builtin.debug:  
+        #items2dict filter is used to convert a list of dictionaries back into a single dictionary. In this case, the tags_list variable, which is a list of dictionaries, is converted back into a single dictionary.
+        msg: "my tags are {{ tags_list | items2dict }}"
+    - name: cread yaml and take into variable
+      ansibile.builtin.set_fact:
+        student_yml: "{{ Lookup('file', 'student.yml') | from_yaml }}"
+    - name: convert yaml to json using to_json filter
+      ansible.builtin.debug:
+        #to_json filter is used to convert a data structure (like a dictionary or list) into a JSON-formatted string. In this case, the student_yml variable, which contains the contents of the student.yml file, is converted into a JSON string.
+        msg: "student details in json format {{ student_yml | to_json }}"
+    - name: save json to file
+      ansible.builtin.copy:
+        content: "{{ student_yml | to_nice_json }}"
+        dest: ./student_data.json
+        #to_nice_json filter is used to convert a data structure into a JSON-formatted string with indentation and line breaks for better readability. In this case, the student_yml variable is converted into a nicely formatted JSON string before being saved to the student_data.json file.
+    - name: convert to uppercase
+      ansible.builtin.debug:
+        vars:
+          name: vinay kumar
+        msg: "my name in uppercase is {{ name | upper }}"
+        #upper filter is used to convert a string to uppercase. In this case, the name
+    - name: validate Ip address using ipaddr filter
+      ansible.builtin.debug:
+        vars:
+          ip_address: 256.856.123.45
+        msg: "is the ip address valid? {{ ip_address | ansible.utils.ipaddr }}"
+        #ipaddr filter is used to validate whether a given string is a valid IP address. In this case, the ip_address variable is checked to see if it is a valid IP address. Since 256.856.123.45 is not a valid IP address, the filter will return False.
+    - name: grep for root
+      ansible.builtin.shell: cat /etc/passwd | grep root
+      register: grep_result
+    - name: print grep result
+      ansible.builtin.debug:
+        msg: "the grep result is {{ grep_result }}"
+        #The grep filter is used to filter a list of items based on a regular expression pattern. In this case, the grep_result variable contains the output of the shell command that greps for "root" in the /etc/passwd file. The debug task will print the result of the grep command, which should include any lines from the /etc/passwd file that contain the word "root".
+    - name: redirect the command output to a file
+      ansible.builtin.shell: ls -lrta > ls_output.txt # for simple command use the command otherwise use shell module
+      register: ls_result
+    - name: print the command output
+      ansible.builtin.debug:  
+        msg: "the command output is {{ ls_result }}"
+        #The redirect filter is used to redirect the output of a command to a file. In this case, the shell command lists the files in long format, sorted by modification time, and redirects the output to a file named ls_output.txt. The debug task will print the result of the shell command, which may not contain the actual output of the command since it is redirected to a file. Instead, it may contain information about the execution of the command itself.

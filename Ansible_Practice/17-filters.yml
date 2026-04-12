@@ -25,22 +25,27 @@
       ansible.builtin.debug:
         #dict2items filter is used to convert a dictionary into a list of dictionaries, where each dictionary represents a key-value pair from the original dictionary. In this case, the tags variable is converted into a list of dictionaries.
         msg: "my tags are {{ tags | dict2items }}"
+    
     - name: converting dictonary to list using items2dict filter
       ansible.builtin.debug:  
         #items2dict filter is used to convert a list of dictionaries back into a single dictionary. In this case, the tags_list variable, which is a list of dictionaries, is converted back into a single dictionary.
         msg: "my tags are {{ tags_list | items2dict }}"
+    
     - name: cread yaml and take into variable
       ansible.builtin.set_fact:
-        student_yml: "{{ Lookup('file', 'student.yml') | from_yaml }}"
+        student_yml: "{{ lookup('file', 'student.yml') | from_yaml }}"
+
     - name: convert yaml to json using to_json filter
       ansible.builtin.debug:
         #to_json filter is used to convert a data structure (like a dictionary or list) into a JSON-formatted string. In this case, the student_yml variable, which contains the contents of the student.yml file, is converted into a JSON string.
         msg: "student details in json format {{ student_yml | to_json }}"
+
     - name: save json to file
       ansible.builtin.copy:
         content: "{{ student_yml | to_nice_json }}"
         dest: ./student_data.json
         #to_nice_json filter is used to convert a data structure into a JSON-formatted string with indentation and line breaks for better readability. In this case, the student_yml variable is converted into a nicely formatted JSON string before being saved to the student_data.json file.
+    
     - name: convert to uppercase
       ansible.builtin.debug:
         vars:

@@ -3,6 +3,7 @@
   connection: local
   vars:
     NAMES: "VinayKumar" # this is an empty string variable
+    ip_address: 256.856.123.45
     TechStack: Linux, shell scripting, Ansible, Docker, Kubernetes # this is a string variable
     tags:
       # Dictonary and map are same thing in ansible
@@ -54,8 +55,6 @@
 
     - name: validate Ip address using ipaddr filter
       ansible.builtin.debug:
-        vars:
-          ip_address: 256.856.123.45
         msg: "is the ip address valid? {{ ip_address | ansible.utils.ipaddr }}"
         #ipaddr filter is used to validate whether a given string is a valid IP address. In this case, the ip_address variable is checked to see if it is a valid IP address. Since 256.856.123.45 is not a valid IP address, the filter will return False.
     

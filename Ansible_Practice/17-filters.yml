@@ -2,6 +2,7 @@
   hosts: local
   connection: local
   vars:
+    NAMES: "VinayKumar" # this is an empty string variable
     TechStack: Linux, shell scripting, Ansible, Docker, Kubernetes # this is a string variable
     tags:
       # Dictonary and map are same thing in ansible
@@ -48,11 +49,9 @@
     
     - name: convert to uppercase
       ansible.builtin.debug:
-        vars:
-          name: vinaykumar
-        msg: "my name in uppercase is {{ name | upper }}"
-        #upper filter is used to convert a string to uppercase. In this case, the name
-    
+        msg: "my name in uppercase is {{ NAMES | upper }}"
+        #upper filter is used to convert a string to uppercase. In this case, the NAMES variable
+
     - name: validate Ip address using ipaddr filter
       ansible.builtin.debug:
         vars:

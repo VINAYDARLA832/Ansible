@@ -10,11 +10,10 @@
       ansible.builtin.dnf:
         name: nginx
         state: present
-    - name: remove the default nginx configuration file
+    - name: remove the default nginx configuration directory
       ansible.builtin.file:
-        state: absent
         path: /usr/share/nginx/html/
-        recurse: yes
+        state: absent
     
     - name: create html directory
       ansible.builtin.file:

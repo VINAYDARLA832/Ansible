@@ -1,0 +1,43 @@
+- name: Create Ec2_Instance and add to Route53
+  hosts: localhost
+  connection: local
+  vars:
+    AMI_ID: ami-0220d79f3f480ecf5
+    SG_ID: sg-06298c18e86c57b2e
+    ZoneId: "Z018042118DWYK39M0YVT"
+    DomainName: "darlavinaykumar.fun"
+    instances:
+      - mongodb
+      - redis
+  tasks:
+    - name: create ec2 instance
+      amazon.aws.ec2_instance:
+        name: {{ item }}
+        instance_type: t3.micro
+        security_group: "{{ SG_ID }}"
+        image_id: "{{ AMI_ID }}"
+        tags:
+          name: "{{ item }}"
+      loop: {{ instances }}
+      register: ec2
+
+    - name: print the ec2-output
+      ansible.builtin.debug:
+        msg: "{{ ec2 }}"
+    
+    - name: print the public ip of ec2 instance
+      ansible.builtin.debug:
+        msg: "{{ item.instances[0].private_ip_address }}"
+      loop: {{ ec2.results }}
+
+
+    - name: create route53 record
+      amazon.aws.route53:
+        state: present
+        zone: "{{ DomainName }}"
+        record: "{{ item.item }}.{{ DomainName }}"
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].private_ip_address }}"
+        overwrite: true
+      loop: {{ ec2.results }}

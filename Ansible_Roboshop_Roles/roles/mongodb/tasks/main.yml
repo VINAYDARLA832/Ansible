@@ -1,0 +1,27 @@
+- name: adding mongodb repo file
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+    
+- name: install mongodb
+  ansible.builtin.dnf:
+    name: mongodb-org
+    state: present
+    
+- name: start mongodb service
+  ansible.builtin.service:
+    name: mongod
+    state: started
+    enabled: yes
+    
+- name: replace the bindIp value in mongod.conf file
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: restart mongodb service
+  ansible.builtin.service:
+    name: mongod
+    state: restarted
+    enabled: yes

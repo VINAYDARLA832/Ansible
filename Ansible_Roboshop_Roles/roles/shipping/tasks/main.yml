@@ -1,10 +1,10 @@
 - name: app setup
-  ansible.buitin.import_role:
+  ansible.builtin.import_role:
     name: common
     tasks_from: app-setup.yml
 
 - name: app setup
-  ansible.buitin.import_role:
+  ansible.builtin.import_role:
     name: common
     tasks_from: java.yml
 
@@ -31,6 +31,6 @@
 
 
 - name: system setup
-  ansible.buitin.import_role:
+  ansible.builtin.import_role:
     name: common
     tasks_from: system-setup.yml

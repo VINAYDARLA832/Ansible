@@ -31,6 +31,6 @@
   when: catalogue_output.stdout | int < 0
 
 - name: app setup
-  ansible.buitin.import_role:
+  ansible.builtin.import_role:
     name: common
     tasks_from: system-setup.yml
